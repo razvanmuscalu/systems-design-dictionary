@@ -30,16 +30,16 @@
 
 ## Pointers vs Copies
 
-  - Copies are pass-by-value
-    - They work on copies of data, so methods attached to literals will not change the underlying data
-    - They live on the stack
-    - Use them for small objects (e.g. primitives)
-  -  Pointers are pass-by-reference
-    - Methods attached to pointers will change the data at the referenced address
-    - They live on the heap
-    - Use them for large objects
-    - Do NOT return pointers only to be able to return nil
-  - See: https://gobyexample.com/pointers
+- Copies are pass-by-value
+  - They work on copies of data, so methods attached to literals will not change the underlying data
+  - They live on the stack
+  - Use them for small objects (e.g. primitives)
+- Pointers are pass-by-reference
+  - Methods attached to pointers will change the data at the referenced address
+  - They live on the heap
+  - Use them for large objects
+  - Do NOT return pointers only to be able to return nil
+- See: https://gobyexample.com/pointers
   
 
 # Concurrency
