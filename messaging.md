@@ -35,8 +35,10 @@ Benefit: rich clients
 <br />
 
 - CQRS is about separating read models from write models
+  
   https://www.eventstore.com/cqrs-pattern
   https://martinfowler.com/bliki/CQRS.html
+
   - This is done as application complexity increases
   - Separation is at application/flow level (under-the-hood can separate databases into read and write databases but it’s not a pre-requisite)
 
@@ -46,6 +48,11 @@ Benefit: rich clients
   - Multiple sources publish their write-events on individual streams
   - One consumer reads the events and builds a read-model
 
+<br />
+
+Benefits:
+- Can reduce complexity when used in one specific area of the system (one Bounded Context) which is prone to complexity
+- Can increase performance (since it allows for separate read and write systems to evolve naturally)
 
 # Event Bus
 
