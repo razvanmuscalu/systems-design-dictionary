@@ -31,7 +31,7 @@ A collection of notes around from Kafka [design documentation](https://kafka.apa
 <br />
 
 - Supports partitioning of topic
-    - Multiple consumers with same consumer group assign themselves to different partitions
+    - Brokers assign multiple consumers with same consumer group to different partitions
         - Or consumers can receive from exact partition
     - Producers can send to topic or exact partition
 
@@ -43,9 +43,9 @@ A collection of notes around from Kafka [design documentation](https://kafka.apa
 
 # Producers-Consumers Sync
 
-- If producers mark messages as consumed immediately
+- If producers mark messages as _consumed_ immediately
     - If consumers fail during processing then the message is lost
-- Producers can mark messages as sent and wait for ack from consumers to mark as consumed
+- Producers can mark messages as _sent_ and wait for ack from consumers to mark as _consumed_
     - If consumers fail to send ack back to producers, then messages will be consumed twice
 
 <br />
@@ -63,9 +63,9 @@ A collection of notes around from Kafka [design documentation](https://kafka.apa
 ## Async vs Sync
 
 - Send async via batching
-    - batch.size
-    - linger.ms (how much to wait before sending whatever is in batch)
-    - max.block.ms (how much to wait for message to be consumed)
+    - `batch.size`
+    - `linger.ms` (how much to wait before sending whatever is in batch)
+    - `max.block.ms` (how much to wait for message to be consumed)
 - Send sync and wait for broker ack
     - Fire & forget, leader ack, quorum ack
     - Leader vs Quorum ack means producers can choose level of eventual consistency
