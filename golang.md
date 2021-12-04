@@ -10,7 +10,7 @@
     - [Buffered vs Unbuffered](#buffered-vs-unbuffered)
   - [Advanced Concurrency](#advanced-concurrency)
   - [Context](#context)
-  - [Garbage Collection](#garbage-collection)
+- [Garbage Collection](#garbage-collection)
 
 # Basics
 
