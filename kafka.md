@@ -67,7 +67,7 @@ A collection of notes around from Kafka [design documentation](https://kafka.apa
     - `linger.ms` (how much to wait before sending whatever is in batch)
     - `max.block.ms` (how much to wait for message to be consumed)
 - Send sync and wait for broker ack
-    - Fire & forget, leader ack, quorum ack
+    - leader ack, quorum ack
     - Leader vs Quorum ack means producers can choose level of eventual consistency
 
 ## Idempotent Delivery
