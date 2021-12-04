@@ -26,7 +26,7 @@ Benefit: rich clients
 - And therefore can build richer transformations themselves
 
 
-#CQRS
+# CQRS
 
 
 - Traditionally, domains mapped to a single CRUD flow
