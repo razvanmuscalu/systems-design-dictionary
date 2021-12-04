@@ -60,6 +60,11 @@ Benefits:
 - Systems publish domain events
   - These are not raw events (like the write operations in a database change stream)
   - Instead they are transformed domain objects
+- Alternatively, systems publish minimal events with IDs referencing data in other systems
+  - These messages are usually routed via a proxy/callback that accumulates data from IDs and then publish on the event bus
+
+<br />
+
 - All systems publish on a single bus
 - All systems consume from a single bus
   - Each consumes the events they’re interested in
