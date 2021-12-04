@@ -34,10 +34,12 @@ A collection of applied patterns at various work projects.
     - Build discard object with more and more changes that have been applied
     - Discard all accumulated changes if any change fails to be applied
 
+<br />
 
 - Queue pre-emptively
     - And queue rollback if local change fails
 
+<br />
 
 - After local change is applied, queue change in second system
 

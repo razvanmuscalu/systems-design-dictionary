@@ -12,6 +12,7 @@ Notes from a few Grokking the Systems Design Interview.
     - There are not lots of relationships
     - System will be read heavy and needs to be highly available
 
+<br />
 
 - Generate on-demand: Encode URL
     - Problems
@@ -21,6 +22,7 @@ Notes from a few Grokking the Systems Design Interview.
         - Append increasing sequence to long URL and then encode
         - Append user ID to long URL and then encode
 
+<br />
 
 - Generate offline: KGS (Key Generation Service)
     - KGS continuously generates unique keys
@@ -37,21 +39,25 @@ Notes from a few Grokking the Systems Design Interview.
 - Use Redis for distributed cache
     - Can persist too if necessary
 
+<br />
 
 Below assumes rate limiting per 1 minute
 
+<br />
 
 - Fixed window
     - UserID -> {Count, StartTime}
     - When request comes, increment Count
     - When request comes and 1 minute passed => reset StartTime and Count
 
+<br />
 
 - Sliding window
     - UserID -> SortedSet<Request.Time>
     - When request comes, add it to set
     - When request comes, remove requests older than 1 minute
 
+<br />
 
 - Sliding window with time slicing
     - UserID -> Map<Time, Count>
@@ -60,13 +66,13 @@ Below assumes rate limiting per 1 minute
       (This uses a lot less storage then sliding window algo)
 
 
-
 # Instagram-Twitter
 
 - We need to keep relationships: users that a user follows, pages that a user follows, etc.
     - Use SQL (and use many-to-many tables)
     - Or use Cassandra (and each user that a user follows is stored in a new column)
 
+<br />
 
 - Sharding
     - Per User ID
@@ -78,6 +84,7 @@ Below assumes rate limiting per 1 minute
             - Can use KGS (Key Generation Service) to generate the IDs
         - Append epoch to key so that news generation queries can be more efficient
 
+<br />
 
 - News Feed Generation
     - On-demand is not good because it would require too much computing per each request
@@ -87,6 +94,7 @@ Below assumes rate limiting per 1 minute
         - Push: not good for users with many followers as they’d receive too many pushes
         - Hybrid: combine pull & push
 
+<br />
 
 - This is very similar to designing Twitter
     - Just replace photos with tweets

@@ -3,6 +3,7 @@
 - Same language shared between engineering and business
     - Same terminology, same domain model, etc.
 
+<br />
 
 - `Domain` is the smallest unit and consists of
     - `Entity` (e.g. agreement, policy)

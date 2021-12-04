@@ -17,6 +17,7 @@ A collection of notes around from Kafka [design documentation](https://kafka.apa
     - Directly on filesystem
     - All topics (and all partitions within a topic) maintain order
 
+<br />
 
 - Supports replication
     - Master-Follower replication as all reads and writes are via leader
@@ -27,16 +28,17 @@ A collection of notes around from Kafka [design documentation](https://kafka.apa
     - Master maintains and decides the order of the messages
         - So followers only need to persist without worrying about order
 
+<br />
 
 - Supports partitioning of topic
     - Multiple consumers with same consumer group assign themselves to different partitions
         - Or consumers can receive from exact partition
     - Producers can send to topic or exact partition
 
+<br />
 
 - Supports splitting of topics into multiple topics
 - Supports transformation of events on the fly
-
 
 
 # Producers-Consumers Sync
@@ -46,6 +48,7 @@ A collection of notes around from Kafka [design documentation](https://kafka.apa
 - Producers can mark messages as sent and wait for ack from consumers to mark as consumed
     - If consumers fail to send ack back to producers, then messages will be consumed twice
 
+<br />
 
 - Producers decide level of consistency (how many replicas have to be written to followers)
     - A message is considered committed on the broker when all in-sync followers persisted the message
@@ -73,8 +76,7 @@ A collection of notes around from Kafka [design documentation](https://kafka.apa
 - Producers send a sequence ID with every message
     - Producers can retry safely to deliver messages
     - Brokers can deduplicate messages when a producer sends a message that the broker fails to commit
-
-
+    
 
 # Consumer
 
@@ -85,6 +87,7 @@ A collection of notes around from Kafka [design documentation](https://kafka.apa
 - If data is pushed to consumers, then consumers can be overwhelmed
     - So publishers have to implement exponential backoff
 
+<br />
 
 - If consumers pull data, they could pull when there’s nothing new, thus wasting resources
     - Kafka supports long-poll so connections aren’t wasted
@@ -94,10 +97,12 @@ A collection of notes around from Kafka [design documentation](https://kafka.apa
 - `at-most-once`: read messages, save position in the log, process messages
     - If processing fails, message is lost as log position has already been saved
 
+<br />
 
 - `at-least-once`: read messages, process messages, save position in the log
     - If saving position fails, processed messages will be re-processed
 
+<br />
 
 - `exactly-once` with transactions
     - In Kafka Streams, when consuming from topic 1 and producing to topic 2

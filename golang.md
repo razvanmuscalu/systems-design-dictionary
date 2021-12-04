@@ -91,12 +91,15 @@
   - Signal when routine is done by deferring `wg.Done()`
   - Wait on main routine (`wg.Wait()`)
 
+<br />
 
 - To propagate errors from routines, use err groups
 
+<br />
 
 - Rate limiting via time tickers (https://gobyexample.com/rate-limiting)
 
+<br />
 
 - Can control safety of shared heap via atomic counters (https://gobyexample.com/atomic-counters) or mutexes (https://gobyexample.com/mutexes)
 
