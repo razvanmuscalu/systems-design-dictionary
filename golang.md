@@ -10,6 +10,7 @@
     - [Buffered vs Unbuffered](#buffered-vs-unbuffered)
   - [Advanced Concurrency](#advanced-concurrency)
   - [Context](#context)
+  - [Garbage Collection](#garbage-collection)
 
 # Basics
 
@@ -114,3 +115,39 @@
   * Context also carries user-defined request-scoped values (e.g. user id, etc.)
   * See: https://gobyexample.com/context
   * See: https://go.dev/blog/context
+
+
+# Garbage Collection
+
+- JVM uses generational garbage collection
+  - Young (Eden + Survivor 1/2) space (for newly allocated objects)
+  - Old space (for objects which survived garbage collections)
+
+<br />
+
+- Go uses non-generational garbage collection
+  - The compiler does static analysis on the code to "guess" the lifetime of objects
+    - If it can determine that objects do not escape their functions, they're allocated on the stack
+    - Otherwise they're allocated on the heap
+  - This means fewer objects end up in heap and there's no need for a generational garbage collector
+
+<br />
+
+- Go's garbage collector is concurrent
+  - It runs concurrently with the application which mutates the heap
+  - But it does involve stop-the-world
+    - GC puts write barrier to application routines
+    - Performs the garbage collection
+    - And removes the write barrier
+
+<br />
+
+- Go's garbage collector is mark-and-sweep
+  - Mark objects that are eligible to be collected
+  - Sweep the marked objects
+
+<br />
+
+Tuning
+- GOCC determines the rate/percentage at which memory size is increased
+  - e.g. for GOGC=100 when memory reaches 4M it will be increased to 8M
