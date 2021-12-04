@@ -9,6 +9,7 @@ A collection of notes around messaging.
 
 # Event Sourcing
 
+
 - e.g. a database has a change stream with all the changes ever made
   - Equivalent to a change stream of all write operations ever made
 
@@ -24,7 +25,9 @@ Benefit: rich clients
 - Clients consume raw data instead of transformed data (which loses information in the process)
 - And therefore can build richer transformations themselves
 
+
 #CQRS
+
 
 - Traditionally, domains mapped to a single CRUD flow
   - Same domain model used for reading and writing
@@ -43,7 +46,9 @@ Benefit: rich clients
   - Multiple sources publish their write-events on individual streams
   - One consumer reads the events and builds a read-model
 
+
 # Event Bus
+
 
 - Systems publish domain events
   - These are not raw events (like the write operations in a database change stream)
@@ -70,12 +75,16 @@ Problems
   - Either compact the log and remove them (not easy with many consumers)
   - Or keep them around
 
+
 ### Event Sourcing & Event Bus
+
 
 - There can be a common trap to mix these two
   - Many systems doing their own event sourcing (publishing) on a common stream (event bus)
 
+
 # Queue
+
 
 - It CAN be similar to an event bus
 - But it’s usually a 1-to-1 mapping
