@@ -8,13 +8,16 @@ Notes from a few Grokking the Systems Design Interview.
 
 # Tiny URL
 
-Storage
+### Storage
+
 - Use NoSQL
     - There are not lots of relationships
     - System will be read heavy and needs to be highly available
     - Objects stored are small
 
 <br />
+
+### Logic
 
 - Generate on-demand: Encode URL
     - Problems
@@ -38,7 +41,8 @@ Storage
 
 <br />
 
-Partitioning
+### Partitioning
+
 - range-based (e.g. based on first letter of the long URL)
   - this will have skewed servers (e.g. more URLs start with letter "E" than with letter "Z")
 - hash-based (based on the short URL)
@@ -47,11 +51,14 @@ Partitioning
 
 # API Rate Limiter
 
-Storage
+### Storage
+
 - Use Redis for distributed cache
     - Can persist too if necessary
 
 <br />
+
+### Logic
 
 Below assumes rate limiting per 1 minute
 
@@ -80,7 +87,8 @@ Below assumes rate limiting per 1 minute
 
 # Instagram-Twitter
 
-Storage
+### Storage
+
 - We need to keep relationships: users and pages that a user follows, photos belonging to users, etc.
     - Use SQL (and use many-to-many tables)
     - Or use NoSQL/Cassandra
@@ -90,11 +98,14 @@ Storage
 
 <br />
 
-Scalability
+### Scalability
+
 - Separate into read and write servers
 - So that writes don't starve connections and affect reads
 
 <br />
+
+### Sharding
 
 Sharding per User ID
 - Photo ID is a simple increment in each database shard
@@ -124,7 +135,8 @@ Sharding Per Photo ID and Creation Time
 
 <br />
 
-News Feed Generation
+### News Feed Generation
+
 - On-demand is not good because it would require too much computing per each request (so it'd be slow)
 - Solution is to pre-generate feeds continuously for every user
     - First query to get last time the feed was generated (when the linked hash map was updated)
@@ -141,7 +153,8 @@ User -> Struct {
 - Need to decide on how big the in-memory linked hash map has to be.
 - Since the linked hash map has fixed size for every user, we CAN shard this structure by User ID.
 
-Sending to clients
+### Sending to Clients
+
 - Pull: not good for users with few followers as lots of pulls will be when there’s nothing new
 - Push: not good for users with many followers as they’d receive too many pushes
 - Hybrid: combine pull & push
