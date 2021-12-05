@@ -6,6 +6,7 @@ A collection of notes around databases.
 - [Optimistic Locking](#optimistic-locking)
 - [Connection Pooling](#connection-pooling)
 - [Mongo](#mongo)
+- [Redis](#redis)
 
 # Pessimistic Locking
 
@@ -59,3 +60,27 @@ A collection of notes around databases.
 - Recently supports transactions
 - Recently supports aggregation pipelines (basically similar to Java streaming but done inside database)
     - Aggregation works on sharded clusters
+
+# Redis
+
+- Can be used as:
+  - in-memory cache
+  - database
+    - periodic dump of cache to disk
+    - appending each command to a disk-based log
+  - pub/sub system
+
+<br />
+
+- Provides rich data structures
+  - sorted sets allowing for range-based queries
+- Allows for rich operations
+  - append to string
+  - push to list
+  - return min/max from sorted set
+  - compute intersection/union/diff of sets
+
+<br />
+
+- Supports transactions
+- Supports async non-blocking replication
