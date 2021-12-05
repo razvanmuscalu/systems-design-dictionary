@@ -19,7 +19,7 @@ Notes from a few Grokking the Systems Design Interview.
 
 ### Logic
 
-- Generate on-demand: Encode URL
+- `Generate On-Demand`: Encode URL
     - Problems
         - Can result in key collisions (MD5 produces 21 characters, but we’ll end up choosing a subset)
         - Multiple users can enter same long URL but they'll get the same short URL
@@ -30,7 +30,7 @@ Notes from a few Grokking the Systems Design Interview.
 
 <br />
 
-- Generate offline: KGS (Key Generation Service)
+- `Generate Offline`: KGS (Key Generation Service)
     - KGS continuously generates unique keys
     - Keep 2 tables: one for unused and one for used keys
     - Application servers can cache sets of short keys
@@ -65,21 +65,21 @@ Below assumes rate limiting per 1 minute
 <br />
 
 - Fixed window
-    - UserID -> {Count, StartTime}
+    - `UserID -> {Count, StartTime}`
     - When request comes, increment Count
     - When request comes and 1 minute passed => reset StartTime and Count
 
 <br />
 
 - Sliding window
-    - UserID -> SortedSet<Request.Time>
+    - `UserID -> SortedSet<Request.Time>`
     - When request comes, add it to set
     - When request comes, remove requests older than 1 minute
 
 <br />
 
 - Sliding window with time slicing
-    - UserID -> Map<Time, Count>
+    - `UserID -> Map<Time, Count>`
     - When request comes, increment count of the time window it falls under
     - When request comes, remove map entries where the key (time) is older than 1 minute
       (This uses a lot less storage then sliding window algo)
@@ -92,9 +92,9 @@ Below assumes rate limiting per 1 minute
 - We need to keep relationships: users and pages that a user follows, photos belonging to users, etc.
     - Use SQL (and use many-to-many tables)
     - Or use NoSQL/Cassandra
-      - _Photo_: PhotoID -> Object (Location, Timestamp, etc.)
-      - _USerPhoto_: each photo ID that a user uploads, is stored in a new column
-      - _UserFollow_: each user ID that a user follows, is stored in a new column
+      - `Photo`: PhotoID -> Object (Location, Timestamp, etc.)
+      - `USerPhoto`: each photo ID that a user uploads, is stored in a new column
+      - `UserFollow`: each user ID that a user follows, is stored in a new column
 
 <br />
 
