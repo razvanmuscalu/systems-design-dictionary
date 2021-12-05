@@ -5,6 +5,7 @@ Notes from a few Grokking the Systems Design Interview.
 - [Tiny URL](#tiny-url)
 - [API Rate Limiter](#api-rate-limiter)
 - [Instagram/Twitter](#instagram-twitter)
+- [Web Crawler](#web-crawler)
 
 # Tiny URL
 
@@ -187,3 +188,43 @@ User -> Struct {
 
 This is very similar to designing Twitter
 - Just replace photos with tweets
+
+# Web Crawler
+
+URL Frontier
+- Can have a user-defined list of filters (newly discovered URLs pass through the filters before being added)
+- Can be sharded per URL
+  - Need to make sure each URL is consumed only once (to not overwhelm servers hosting the URLs)
+
+Database Design
+- Push into sharded database
+- Batch job queries all shards and sends into multiple queues (e.g. SQS queues)
+  - One queue per shard
+
+Kafka Design
+- Push straight into sharded topics in Kafka
+  - And enable persistence on Kafka
+
+<br />
+
+HTML Fetcher
+- Extensible with separate modules for HTTP, FTP, etc.
+
+<br />
+
+Extractor
+- Extensible with separate modules for extracting links, extracting images, extracting videos, etc.
+- Can use SNS here to send to each module that needs to extract things
+
+<br />
+
+Deduplicator
+- At HTML level (whether the current page has been visited before)
+- At URL level (whether a newly discovered URL has been visited before)
+  - Need to cache as some URLs will be very hot (e.g. google.com)
+- Use MD5 hashing to perform the "seen"-test
+  - This makes the storage smaller
+
+<br />
+
+Data Store
