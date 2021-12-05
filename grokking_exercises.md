@@ -8,6 +8,7 @@ Notes from a few Grokking the Systems Design Interview.
 
 # Tiny URL
 
+Storage
 - Use NoSQL
     - There are not lots of relationships
     - System will be read heavy and needs to be highly available
@@ -46,6 +47,7 @@ Partitioning
 
 # API Rate Limiter
 
+Storage
 - Use Redis for distributed cache
     - Can persist too if necessary
 
@@ -78,6 +80,7 @@ Below assumes rate limiting per 1 minute
 
 # Instagram-Twitter
 
+Storage
 - We need to keep relationships: users and pages that a user follows, photos belonging to users, etc.
     - Use SQL (and use many-to-many tables)
     - Or use NoSQL/Cassandra
@@ -87,9 +90,9 @@ Below assumes rate limiting per 1 minute
 
 <br />
 
-- Scalability
-  - Separate into read and write servers
-  - So that writes don't starve connections and affect reads
+Scalability
+- Separate into read and write servers
+- So that writes don't starve connections and affect reads
 
 <br />
 
