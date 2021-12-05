@@ -107,7 +107,7 @@ Below assumes rate limiting per 1 minute
 
 ### Sharding
 
-Sharding per User ID
+Sharding Per `User ID`
 - Photo ID is a simple increment in each database shard
   - Because all data about one user is on a single shard
 - Not good because of hot users (with lots of followers)
@@ -116,18 +116,18 @@ Sharding per User ID
 
 <br />
 
-Sharding Per Photo ID
+Sharding Per `Photo ID`
 - Have to pre-generate photo IDs
   - Because we need to know the ID first in order to find the shard
   - Can use KGS (Key Generation Service) to generate the IDs
     - Can have multiple KGS (e.g. one supplies even numbers and one supplies odd numbers) and round-robin on them
 
-Sharding Per Creation Time
+Sharding Per `Creation Time`
 - Solves problem of database queries on individual shards being slow
   - As there needs to be a sort by time, but photos already sorted and indexed by time
 - Problem is that there would be only a subset of shards getting most of the read and write traffic
 
-Sharding Per Photo ID and Creation Time
+Sharding Per `Photo ID and Creation Time`
 - Append creation time to photo ID
   - ID will have two parts: creation time + incrementing sequence from KGS
 - Traffic is evenly distributed across all shards
@@ -155,11 +155,11 @@ User -> Struct {
 
 ### Sending to Clients
 
-- Pull: not good for users with few followers as lots of pulls will be when there’s nothing new
-- Push: not good for users with many followers as they’d receive too many pushes
-- Hybrid: combine pull & push
+- `Pull`: not good for users with few followers as lots of pulls will be when there’s nothing new
+- `Push`: not good for users with many followers as they’d receive too many pushes
+- `Hybrid`: combine pull & push
 
 <br />
 
-- This is very similar to designing Twitter
-    - Just replace photos with tweets
+This is very similar to designing Twitter
+- Just replace photos with tweets
