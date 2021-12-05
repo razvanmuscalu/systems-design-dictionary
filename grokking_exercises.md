@@ -156,7 +156,7 @@ User -> Struct {
 ### Sending to Clients
 
 - `Pull`: not good for users with few followers as lots of pulls will be when there’s nothing new
-- `Push`: not good for users with many followers as they’d receive too many pushes
+- `Push`: not good for users following many users as they’d receive too many pushes
 - `Hybrid`: combine pull & push
 
 <br />
