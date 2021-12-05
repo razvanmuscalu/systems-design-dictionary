@@ -191,7 +191,8 @@ This is very similar to designing Twitter
 
 # Web Crawler
 
-URL Frontier
+### URL Frontier
+
 - Can have a user-defined list of filters (newly discovered URLs pass through the filters before being added)
 - Can be sharded per URL
   - Need to make sure each URL is consumed only once (to not overwhelm servers hosting the URLs)
@@ -207,24 +208,25 @@ Kafka Design
 
 <br />
 
-HTML Fetcher
+### HTML Fetcher
+
 - Extensible with separate modules for HTTP, FTP, etc.
 
 <br />
 
-Extractor
+### Extractor
+
 - Extensible with separate modules for extracting links, extracting images, extracting videos, etc.
 - Can use SNS here to send to each module that needs to extract things
+- Each module is federated into separate system with separate data store
 
 <br />
 
-Deduplicator
+### Deduplicator
+
 - At HTML level (whether the current page has been visited before)
 - At URL level (whether a newly discovered URL has been visited before)
   - Need to cache as some URLs will be very hot (e.g. google.com)
 - Use MD5 hashing to perform the "seen"-test
   - This makes the storage smaller
-
-<br />
-
-Data Store
+- Each deduplicator is federated into separate system with separate data store
