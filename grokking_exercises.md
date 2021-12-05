@@ -84,6 +84,30 @@ Below assumes rate limiting per 1 minute
     - When request comes, remove map entries where the key (time) is older than 1 minute
       (This uses a lot less storage then sliding window algo)
 
+### Sharding
+
+- per user
+  - this is possible as sizes are capped per user so there cannot be hot users
+  - we can define different rate limits per user
+- per user per URL
+  - we can define different rates for each user per URL
+
+### Caching
+
+- if we can allow for soft cap (e.g. ok if traffic goes 5% above the cap) then we can allow for eventual consistency
+- application servers can use write-through cache
+  - application writes to in-mem cache
+  - the cache uses async write to storage
+  - Redis fits in perfect with periodic dumps to disk
+
+### IP or User ID
+
+- IP is good but
+  - multiple users could be in a cafe, behind same IP
+  - a malicious user could use DDOS the system by hitting the URL from many different IPs (especially with IPv^)
+- User ID is good but
+  - it means the auth system can not be behind the rate limiter
+- so combine both
 
 # Instagram-Twitter
 
