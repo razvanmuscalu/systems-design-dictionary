@@ -8,6 +8,7 @@
   - [Stop Routines](#stop-routines)
   - [Channels](#channels)
     - [Buffered vs Unbuffered](#buffered-vs-unbuffered)
+    - [Channels and Mutexes](#channels-and-mutexes)
   - [Advanced Concurrency](#advanced-concurrency)
   - [Context](#context)
 - [Garbage Collection](#garbage-collection)
@@ -73,14 +74,20 @@
 * Channels are used to send data between go routines
 * By default, they’re blocking (a sender will be blocked if the sender is not ready to receive)
   * The blocking nature can avoided by using a default case in the “select” statement
-    
+* Channels are thread-safe and it's natural for multiple routines to send/receive data via a single channel
 
 ### Buffered vs Unbuffered
 
 * The blocking nature can also be avoided via buffered channels
 * A sender can send to a buffered channel even if receiver is not ready
 * The channel will keep the data until receivers can receive, or until buffer gets full (at this time, senders will start blocking)
-  
+
+### Channels and Mutexes
+
+- Can use mutex (exclusive lock) for safe access to data coming from multiple routines
+- Can use channel (unbuffered channel) for safe access to data
+  - Because unbuffered channels are blocking
+  - So this would guarantee only one routine has access to data at any one point in time
 
 ## Advanced Concurrency
 
