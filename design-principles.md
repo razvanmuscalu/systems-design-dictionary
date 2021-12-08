@@ -17,7 +17,7 @@
     - `Services` (e.g. MTA Processor, Cycle Processor)
 - `Bounded Contexts` are mappings of multiple domains into a larger area
   https://martinfowler.com/bliki/BoundedContext.html
-- `Aggregate` is combining multiple domains into a single unit (e.g. issuance, subscription)
+- `Aggregate` is combining multiple entities into a single unit (e.g. issuance, subscription)
     - An “imported” `Entity` in one `Bounded Context` can be an “entire” `Aggregate` in another `Bounded Context`
     - For example, a policy is an `Entity` within the LTM `Bounded Context`
     - But a policy is an `Aggregate` (of other entities: changeset, event) in Policy `Bounded Context`
